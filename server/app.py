@@ -11,11 +11,11 @@ class Signup(Resource):
     def post(self):
         
         json = request.get_json()
-        if 'username' in json and 'password' in json and 'image_url' in json and 'bio' in json:
+        if 'username' in json and 'password' in json:
             user = User(
                 username=json['username'],
-                image_url=json['image_url'],
-                bio=json['bio']
+                image_url=json.get('image_url'),
+                bio=json.get('bio')
             )
             user.password_hash = json['password']
             db.session.add(user)
